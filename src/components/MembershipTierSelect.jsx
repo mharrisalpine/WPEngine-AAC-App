@@ -89,7 +89,6 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
                     <span className={cn('text-sm font-medium', selected ? 'text-black' : 'text-stone-500')}>/yr</span>
                   )}
                 </span>
-                <p className="mt-2.5 text-[13px] leading-5 text-stone-600">{t.blurb}</p>
                 <TierBenefitsList benefits={t.benefits} />
                 {selected ? (
                   <span className="mt-4 text-xs font-semibold uppercase tracking-wide text-[#8f1515]">Selected</span>
