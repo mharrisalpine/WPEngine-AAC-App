@@ -53,6 +53,7 @@ function App() {
   const isLoginEmbed = runtimeConfig.embedMode === 'login';
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('profile');
+  const [siteHeaderClearance, setSiteHeaderClearance] = useState(0);
   const fullBleedContentRoutes = new Set([]);
   const isFullBleedContentRoute = fullBleedContentRoutes.has(location.pathname);
   const flushTopMemberRoutes = new Set(['/profile']);
@@ -63,6 +64,36 @@ function App() {
   const showPublicOutlet = publicOutletPaths.has(location.pathname);
   const { openMembershipAction } = useMembershipActions();
   const expirationWarning = getExpirationWarningDetails(profile);
+
+  useLayoutEffect(() => {
+    if (location.pathname === '/join') {
+      setSiteHeaderClearance(0);
+      return undefined;
+    }
+
+    let measureFrame = 0;
+    let delayedMeasure = 0;
+    const measureSiteHeader = () => {
+      window.cancelAnimationFrame(measureFrame);
+      measureFrame = window.requestAnimationFrame(() => {
+        const siteHeader = document.getElementById('site-header');
+        const nextClearance = siteHeader ? Math.max(0, Math.ceil(siteHeader.getBoundingClientRect().bottom)) : 0;
+        setSiteHeaderClearance(nextClearance);
+      });
+    };
+
+    measureSiteHeader();
+    delayedMeasure = window.setTimeout(measureSiteHeader, 500);
+    window.addEventListener('load', measureSiteHeader);
+    window.addEventListener('resize', measureSiteHeader);
+
+    return () => {
+      window.cancelAnimationFrame(measureFrame);
+      window.clearTimeout(delayedMeasure);
+      window.removeEventListener('load', measureSiteHeader);
+      window.removeEventListener('resize', measureSiteHeader);
+    };
+  }, [location.pathname]);
 
   useLayoutEffect(() => {
     if (location.pathname !== '/join') {
@@ -183,7 +214,9 @@ function App() {
         className="member-app-surface flex min-h-screen flex-col overflow-visible"
         style={{
           '--aac-portal-header-height': '0px',
-          paddingTop: '0.75rem',
+          paddingTop: siteHeaderClearance > 0
+            ? `calc(${siteHeaderClearance}px + clamp(1.5rem, 2.5vw, 2.5rem))`
+            : '0.75rem',
         }}
       >
         <ExpirationBanner
