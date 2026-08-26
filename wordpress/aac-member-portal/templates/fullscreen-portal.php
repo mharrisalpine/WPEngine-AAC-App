@@ -1575,8 +1575,38 @@ $checkout_tshirt_size_options = $portal_plugin instanceof AAC_Member_Portal_Plug
 			color: #166534;
 		}
 
+		body.pmpro-checkout .aac-managed-card .aac-email-availability[data-state="available"]::before {
+			content: "\2713";
+			display: inline-grid;
+			width: 1.15rem;
+			height: 1.15rem;
+			margin-right: 0.4rem;
+			place-items: center;
+			border-radius: 999px;
+			background: #166534;
+			color: #fff;
+			font-size: 0.78rem;
+			font-weight: 700;
+			line-height: 1;
+		}
+
 		body.pmpro-checkout .aac-managed-card .aac-email-availability[data-state="unavailable"] {
 			color: #8f1515;
+		}
+
+		body.pmpro-checkout .aac-managed-card .aac-email-availability[data-state="unavailable"]::before {
+			content: "!";
+			display: inline-grid;
+			width: 1.15rem;
+			height: 1.15rem;
+			margin-right: 0.4rem;
+			place-items: center;
+			border-radius: 999px;
+			background: #8f1515;
+			color: #fff;
+			font-size: 0.78rem;
+			font-weight: 700;
+			line-height: 1;
 		}
 
 		body.pmpro-checkout .aac-managed-card .aac-email-availability[data-state="checking"],
@@ -7955,6 +7985,8 @@ $checkout_tshirt_size_options = $portal_plugin instanceof AAC_Member_Portal_Plug
 				statusNode = document.createElement('p');
 				statusNode.className = 'aac-email-availability';
 				statusNode.dataset.state = 'idle';
+				statusNode.setAttribute('role', 'status');
+				statusNode.setAttribute('aria-live', 'polite');
 				emailField.appendChild(statusNode);
 			}
 
