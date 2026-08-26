@@ -111,7 +111,7 @@ const buildEmbeddedCheckoutUrl = (tierId, wizardStep = 'account') => {
   checkoutUrl.searchParams.set('aac_embed', '1');
   checkoutUrl.searchParams.set('aac_signup', '1');
   checkoutUrl.searchParams.set('aac_wizard_step', wizardStep);
-  checkoutUrl.searchParams.set('aac_rev', 'email-availability-527');
+  checkoutUrl.searchParams.set('aac_rev', 'wizard-isolation-529');
 
   return checkoutUrl.toString();
 };
