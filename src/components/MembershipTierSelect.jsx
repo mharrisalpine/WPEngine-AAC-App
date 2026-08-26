@@ -19,7 +19,7 @@ function TierBenefitsList({ benefits, dense, maxItems }) {
             strokeWidth={2.5}
             aria-hidden
           />
-          <span>{line}</span>
+          <span className="min-w-0 flex-1 break-words [overflow-wrap:anywhere]">{line}</span>
         </li>
       ))}
       {hiddenCount > 0 ? (
