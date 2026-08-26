@@ -11,7 +11,7 @@ function TierBenefitsList({ benefits, dense, maxItems }) {
   const visibleBenefits = Number.isInteger(maxItems) ? benefits.slice(0, maxItems) : benefits;
   const hiddenCount = Math.max(0, benefits.length - visibleBenefits.length);
   return (
-    <ul className={cn('!ml-0 !mt-6 space-y-2 !pl-0 text-left', dense ? 'text-[13px] leading-5' : 'text-[13px] leading-5')}>
+    <ul className={cn('!-ml-6 !mt-6 space-y-2 !pl-0 text-left', dense ? 'text-[13px] leading-5' : 'text-[13px] leading-5')}>
       {visibleBenefits.map((line) => (
         <li key={line} className="flex gap-2 text-[#514a40]">
           <Check
