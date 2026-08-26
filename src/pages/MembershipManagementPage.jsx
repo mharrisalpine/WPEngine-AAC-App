@@ -136,11 +136,11 @@ const TransactionList = ({ transactions, loading }) => {
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {transactions.slice(0, 5).map((transaction) => (
         <div
           key={transaction.id || transaction.referenceId}
-          className="grid gap-3 border-t border-stone-200 py-4 md:grid-cols-[1fr,auto]"
+          className="grid gap-3 border border-stone-300 bg-white p-4 md:grid-cols-[1fr,auto]"
         >
           <div>
             <p className="font-semibold text-stone-950">
