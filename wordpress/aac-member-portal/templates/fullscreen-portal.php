@@ -7966,10 +7966,6 @@ $checkout_tshirt_size_options = $portal_plugin instanceof AAC_Member_Portal_Plug
 		};
 
 		const bindEmailAvailabilityCheck = () => {
-			if (currentUserEmail) {
-				return;
-			}
-
 			const emailInput = document.querySelector('input[name="bemail"]');
 			if (!emailInput || emailInput.dataset.aacEmailAvailabilityBound === 'true') {
 				return;

@@ -6650,10 +6650,6 @@ const defaultPublicationCardImages = {
 		};
 
 		const bindEmailAvailabilityCheck = () => {
-			if (currentUserEmail) {
-				return;
-			}
-
 			const emailInput = document.querySelector('input[name="bemail"]');
 			if (!emailInput || emailInput.dataset.aacEmailAvailabilityBound === 'true') {
 				return;

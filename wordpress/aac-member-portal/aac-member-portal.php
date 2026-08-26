@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAC Member Portal
  * Description: Embeds the AAC React member portal inside WordPress and exposes REST endpoints for member profile data (Paid Memberships Pro integration).
- * Version: 1.0.524
+ * Version: 1.0.527
  * Author: AAC
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('AAC_MEMBER_PORTAL_VERSION', '1.0.524');
+define('AAC_MEMBER_PORTAL_VERSION', '1.0.527');
 define('AAC_MEMBER_PORTAL_FILE', __FILE__);
 define('AAC_MEMBER_PORTAL_DIR', plugin_dir_path(__FILE__));
 define('AAC_MEMBER_PORTAL_URL', plugin_dir_url(__FILE__));
@@ -2096,6 +2096,77 @@ final class AAC_Member_Portal_Plugin {
 				return fieldset;
 			}
 
+			function bindSignupEmailAvailability(form) {
+				if (!form || !new URLSearchParams(window.location.search).has('aac_signup')) return;
+				const emailInput = form.querySelector('input[name="bemail"]');
+				const emailField = emailInput?.closest('.pmpro_form_field');
+				if (!emailInput || !emailField || emailInput.dataset.aacEmailAvailabilityBound === 'true') return;
+
+				let statusNode = emailField.querySelector('.aac-email-availability');
+				if (!statusNode) {
+					statusNode = document.createElement('p');
+					statusNode.className = 'aac-email-availability';
+					statusNode.dataset.state = 'idle';
+					statusNode.setAttribute('role', 'status');
+					statusNode.setAttribute('aria-live', 'polite');
+					emailField.appendChild(statusNode);
+				}
+
+				let requestCounter = 0;
+				let debounceTimer = null;
+				const setStatus = (state, message) => {
+					statusNode.dataset.state = state;
+					statusNode.textContent = message || '';
+				};
+				const runCheck = async () => {
+					const email = String(emailInput.value || '').trim();
+					emailInput.setCustomValidity('');
+					if (!email) {
+						setStatus('idle', '');
+						return;
+					}
+					if (!emailInput.checkValidity()) {
+						setStatus('idle', 'Enter a valid email address.');
+						return;
+					}
+
+					const currentRequest = ++requestCounter;
+					setStatus('checking', 'Checking email availability...');
+					try {
+						const endpoint = new URL('/wp-json/aac/v1/email-availability', window.location.origin);
+						endpoint.searchParams.set('email', email);
+						const response = await fetch(endpoint.toString(), {
+							credentials: 'same-origin',
+							headers: { Accept: 'application/json' },
+						});
+						if (!response.ok) throw new Error('Email availability request failed.');
+						const result = await response.json();
+						if (currentRequest !== requestCounter) return;
+						if (result?.valid && result?.available) {
+							emailInput.setCustomValidity('');
+							setStatus('available', result.message || 'Email address is available.');
+							return;
+						}
+						const message = result?.message || 'An account with this email already exists.';
+						emailInput.setCustomValidity(message);
+						setStatus('unavailable', message);
+					} catch (error) {
+						if (currentRequest !== requestCounter) return;
+						emailInput.setCustomValidity('');
+						setStatus('idle', 'Unable to check email availability right now.');
+					}
+				};
+				const scheduleCheck = () => {
+					window.clearTimeout(debounceTimer);
+					debounceTimer = window.setTimeout(runCheck, 280);
+				};
+
+				emailInput.addEventListener('input', scheduleCheck);
+				emailInput.addEventListener('change', runCheck);
+				emailInput.addEventListener('blur', runCheck);
+				emailInput.dataset.aacEmailAvailabilityBound = 'true';
+			}
+
 			function enhanceSimpleCheckoutWizard() {
 				const form = document.querySelector('form.pmpro_form');
 				if (!form || form.dataset.aacSimpleCheckoutWizard === 'true' || form.querySelector('.aac-checkout-wizard')) return;
@@ -2118,6 +2189,7 @@ final class AAC_Member_Portal_Plugin {
 				const accountFields = ensureSignupAccountFields(form)
 					|| document.getElementById('pmpro_user_fields')
 					|| document.getElementById('pmpro_account_loggedin');
+				bindSignupEmailAvailability(form);
 				const memberFields = document.getElementById('pmpro_billing_address_fields');
 				const publicationFields = document.getElementById('pmpro_form_fieldset-publication-preferences');
 				const checkoutNodes = [
