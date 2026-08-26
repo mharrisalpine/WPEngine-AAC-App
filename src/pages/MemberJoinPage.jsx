@@ -144,6 +144,18 @@ const MemberJoinPage = () => {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let headerMeasureFrame = 0;
+    let headerMeasureTimer = 0;
+
+    const syncHeaderClearance = () => {
+      window.cancelAnimationFrame(headerMeasureFrame);
+      headerMeasureFrame = window.requestAnimationFrame(() => {
+        const siteHeader = document.querySelector('#site-header');
+        const headerBottom = siteHeader ? Math.max(0, siteHeader.getBoundingClientRect().bottom) : 0;
+        document.documentElement.style.setProperty('--aac-signup-header-clearance', `${Math.ceil(headerBottom)}px`);
+      });
+    };
+
     const syncHeaderState = () => {
       const nextScrollY = Math.max(0, window.scrollY);
       const delta = nextScrollY - lastScrollY;
@@ -159,10 +171,17 @@ const MemberJoinPage = () => {
     };
 
     document.body.classList.add('aac-signup-header-managed');
+    syncHeaderClearance();
+    headerMeasureTimer = window.setTimeout(syncHeaderClearance, 500);
     syncHeaderState();
     window.addEventListener('scroll', syncHeaderState, { passive: true });
+    window.addEventListener('resize', syncHeaderClearance);
     return () => {
+      window.cancelAnimationFrame(headerMeasureFrame);
+      window.clearTimeout(headerMeasureTimer);
       window.removeEventListener('scroll', syncHeaderState);
+      window.removeEventListener('resize', syncHeaderClearance);
+      document.documentElement.style.removeProperty('--aac-signup-header-clearance');
       document.body.classList.remove('aac-signup-header-managed', 'aac-signup-header-scrolled', 'aac-signup-header-hidden');
     };
   }, []);

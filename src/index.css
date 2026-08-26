@@ -117,6 +117,10 @@ body.aac-join-scroll-locked .topo-lines > main {
   padding-bottom: clamp(7rem, 10vw, 9rem);
 }
 
+body.aac-signup-header-managed .aac-join-layout {
+  padding-top: calc(var(--aac-signup-header-clearance, 0px) + clamp(1.5rem, 2.5vw, 2.5rem));
+}
+
 .aac-join-sidebar,
 .aac-join-main {
   backface-visibility: hidden;

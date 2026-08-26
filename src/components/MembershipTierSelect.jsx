@@ -11,11 +11,11 @@ function TierBenefitsList({ benefits, dense, maxItems }) {
   const visibleBenefits = Number.isInteger(maxItems) ? benefits.slice(0, maxItems) : benefits;
   const hiddenCount = Math.max(0, benefits.length - visibleBenefits.length);
   return (
-    <ul className={cn('mt-4 space-y-2.5 text-left', dense ? 'text-sm leading-6' : 'text-[15px] leading-6')}>
+    <ul className={cn('mt-3 space-y-2 text-left', dense ? 'text-[13px] leading-5' : 'text-[13px] leading-5')}>
       {visibleBenefits.map((line) => (
         <li key={line} className="flex gap-2 text-[#514a40]">
           <Check
-            className={cn('mt-1 shrink-0 text-[#9e1b1e]', dense ? 'h-4 w-4' : 'h-[18px] w-[18px]')}
+            className={cn('mt-0.5 shrink-0 text-[#9e1b1e]', dense ? 'h-3.5 w-3.5' : 'h-4 w-4')}
             strokeWidth={2.5}
             aria-hidden
           />
@@ -68,28 +68,28 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
               role="radio"
               aria-checked={selected}
               className={cn(
-                'aac-membership-tier-card flex min-h-[340px] flex-col rounded-none border p-6 text-left shadow-sm transition',
+                'aac-membership-tier-card flex min-h-[320px] flex-col rounded-none border p-5 text-left shadow-sm transition',
                 selected
                   ? 'border-[#ffc72c] bg-white ring-2 ring-[#ffc72c] ring-offset-0'
                   : 'border-[#ffc72c] bg-white hover:border-[#d6a300] hover:shadow-md',
               )}
             >
               <div className="flex flex-1 flex-col">
-                <span className="text-xl font-bold text-stone-900">{t.label}</span>
+                <span className="text-lg font-bold text-stone-900">{t.label}</span>
                 <span
                   className={cn(
-                    'aac-membership-tier-card__price mt-2 w-fit text-3xl font-semibold tracking-tight',
+                    'aac-membership-tier-card__price mt-2 w-fit text-[26px] font-semibold leading-8 tracking-tight',
                     selected ? 'bg-[#ffc72c] px-3 py-1.5 text-black' : 'text-[#8f1515]',
                   )}
                 >
                   {priceLabel}
                   {t.priceCents === 0 ? null : isOneTimeMembershipTierId(t.id) ? (
-                    <span className={cn('text-base font-medium', selected ? 'text-black' : 'text-stone-500')}> one-time</span>
+                    <span className={cn('text-sm font-medium', selected ? 'text-black' : 'text-stone-500')}> one-time</span>
                   ) : (
-                    <span className={cn('text-base font-medium', selected ? 'text-black' : 'text-stone-500')}>/yr</span>
+                    <span className={cn('text-sm font-medium', selected ? 'text-black' : 'text-stone-500')}>/yr</span>
                   )}
                 </span>
-                <p className="mt-3 text-sm leading-relaxed text-stone-600">{t.blurb}</p>
+                <p className="mt-2.5 text-[13px] leading-5 text-stone-600">{t.blurb}</p>
                 <TierBenefitsList benefits={t.benefits} />
                 {selected ? (
                   <span className="mt-4 text-xs font-semibold uppercase tracking-wide text-[#8f1515]">Selected</span>
