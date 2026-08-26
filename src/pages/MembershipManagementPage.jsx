@@ -325,13 +325,6 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
 
   const renderAccountSection = () => (
     <section className="bg-white py-6">
-      <SectionHeader
-        icon={User}
-        eyebrow="Account"
-        title="Account management"
-        description="Review your account, current membership term, and profile-management shortcuts."
-      />
-
       <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
         <div>
           <div className="grid gap-x-8 md:grid-cols-2">
@@ -352,7 +345,7 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
               Upgrade Membership
             </Link>
           </Button>
-          {billingUrl ? (
+          {billingUrl && actions?.current_subscription_id ? (
             <Button
               type="button"
               variant="outline"
@@ -378,13 +371,13 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
                 type="button"
                 onClick={handleAutoRenewalToggle}
                 disabled={hasAutoRenewal ? !autoRenewDisableUrl : !autoRenewEnableUrl}
-                className={`aac-auto-renew-toggle relative inline-flex h-8 w-16 shrink-0 items-center border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                className={`aac-auto-renew-toggle relative inline-flex h-8 w-16 shrink-0 items-center rounded-full border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                   hasAutoRenewal ? 'border-[#b71c1c] bg-[#b71c1c]' : 'border-stone-300 bg-stone-100'
                 }`}
                 aria-label={hasAutoRenewal ? 'Turn automatic renewal off' : 'Turn automatic renewal on'}
               >
                 <span
-                  className={`aac-auto-renew-toggle__thumb absolute h-6 w-6 bg-white shadow-sm transition-transform ${
+                  className={`aac-auto-renew-toggle__thumb absolute h-6 w-6 rounded-full bg-white shadow-sm transition-transform ${
                     hasAutoRenewal ? 'translate-x-8' : 'translate-x-1'
                   }`}
                 />

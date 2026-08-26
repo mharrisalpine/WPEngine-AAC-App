@@ -165,7 +165,7 @@ class AAC_Member_Portal_PMPro {
 			$current_level_checkout_url = add_query_arg('aac_reactivate_autorenew', '1', $current_level_checkout_url);
 		}
 
-		$billing_url = self::pmpro_page_url('billing');
+		$billing_url = '';
 		if ($current_subscription_id) {
 			$billing_order_reference = self::find_latest_billing_order_reference($user_id, (int) $current_level_id);
 			$billing_url = self::pmpro_page_url(

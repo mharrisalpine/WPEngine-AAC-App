@@ -70,18 +70,23 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
               className={cn(
                 'aac-membership-tier-card flex min-h-[340px] flex-col rounded-none border p-6 text-left shadow-sm transition',
                 selected
-                  ? 'border-[#b71c1c] bg-white ring-2 ring-[#b71c1c] ring-offset-0'
-                  : 'border-stone-300 bg-white hover:border-stone-500 hover:shadow-md',
+                  ? 'border-[#ffc72c] bg-white ring-2 ring-[#ffc72c] ring-offset-0'
+                  : 'border-[#ffc72c] bg-white hover:border-[#d6a300] hover:shadow-md',
               )}
             >
               <div className="flex flex-1 flex-col">
                 <span className="text-xl font-bold text-stone-900">{t.label}</span>
-                <span className="mt-2 text-3xl font-semibold tracking-tight text-[#8f1515]">
+                <span
+                  className={cn(
+                    'aac-membership-tier-card__price mt-2 w-fit text-3xl font-semibold tracking-tight',
+                    selected ? 'bg-[#ffc72c] px-3 py-1.5 text-black' : 'text-[#8f1515]',
+                  )}
+                >
                   {priceLabel}
                   {t.priceCents === 0 ? null : isOneTimeMembershipTierId(t.id) ? (
-                    <span className="text-base font-medium text-stone-500"> one-time</span>
+                    <span className={cn('text-base font-medium', selected ? 'text-black' : 'text-stone-500')}> one-time</span>
                   ) : (
-                    <span className="text-base font-medium text-stone-500">/yr</span>
+                    <span className={cn('text-base font-medium', selected ? 'text-black' : 'text-stone-500')}>/yr</span>
                   )}
                 </span>
                 <p className="mt-3 text-sm leading-relaxed text-stone-600">{t.blurb}</p>

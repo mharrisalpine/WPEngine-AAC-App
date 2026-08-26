@@ -11,9 +11,9 @@ import { getPortalUiSettings } from '@/lib/portalSettings';
 const CHECKOUT_EMBED_MESSAGE = 'aac-pmpro-checkout-height';
 const CHECKOUT_SCROLL_MESSAGE = 'aac-pmpro-checkout-scroll';
 const CHECKOUT_STEP_MESSAGE = 'aac-pmpro-checkout-step';
-const CHECKOUT_MIN_EMBED_HEIGHT = 540;
+const CHECKOUT_MIN_EMBED_HEIGHT = 320;
 const CHECKOUT_MAX_EMBED_HEIGHT = 5200;
-const POST_PURCHASE_LOGIN_URL = mainSiteHref('/membership/#/login?purchase_success=1');
+const POST_PURCHASE_LOGIN_URL = mainSiteHref('/member-profile/#/login?purchase_success=1');
 const MEMBERSHIP_GRID_PLANS = [
   { id: 'Supporter', price: '$45' },
   { id: 'Partner', price: '$65-100', eyebrow: 'Most Popular' },
@@ -111,7 +111,7 @@ const buildEmbeddedCheckoutUrl = (tierId, wizardStep = 'account') => {
   checkoutUrl.searchParams.set('aac_embed', '1');
   checkoutUrl.searchParams.set('aac_signup', '1');
   checkoutUrl.searchParams.set('aac_wizard_step', wizardStep);
-  checkoutUrl.searchParams.set('aac_rev', 'full-width-phone-shirt-490');
+  checkoutUrl.searchParams.set('aac_rev', 'checkout-validation-516');
 
   return checkoutUrl.toString();
 };
@@ -124,6 +124,7 @@ const MemberJoinPage = () => {
   const currentWizardStepRef = useRef('account');
   const heightFrameRef = useRef(0);
   const pendingHeightRef = useRef(CHECKOUT_MIN_EMBED_HEIGHT);
+  const hasVisibleContentHeightRef = useRef(false);
   const portalUiSettings = getPortalUiSettings();
   const portalContent = portalUiSettings.content;
   const redeemInviteButtonLabel =
@@ -173,6 +174,13 @@ const MemberJoinPage = () => {
       }
 
       if (event.data?.type === CHECKOUT_EMBED_MESSAGE) {
+        const isVisibleContentHeight = event.data.visibleContent === true;
+        if (hasVisibleContentHeightRef.current && !isVisibleContentHeight) {
+          return;
+        }
+        if (isVisibleContentHeight) {
+          hasVisibleContentHeightRef.current = true;
+        }
         const nextHeight = Number(event.data.height);
         if (Number.isFinite(nextHeight) && nextHeight > 0) {
           pendingHeightRef.current = Math.min(Math.max(nextHeight, CHECKOUT_MIN_EMBED_HEIGHT), CHECKOUT_MAX_EMBED_HEIGHT);
@@ -181,7 +189,7 @@ const MemberJoinPage = () => {
               heightFrameRef.current = 0;
               setEmbedHeight((currentHeight) => {
                 const delta = pendingHeightRef.current - currentHeight;
-                const shouldResize = delta >= 24 || delta <= -120;
+                const shouldResize = Math.abs(delta) >= 8;
                 return shouldResize ? pendingHeightRef.current : currentHeight;
               });
             });

@@ -1172,7 +1172,7 @@ $portal_sections = $portal_plugin instanceof AAC_Member_Portal_Plugin
 	body.pmpro-checkout .aac-managed-card #pmpro_payment_information_fields .pmpro_form_fields {
 		gap: 0.45rem;
 		background: #fff;
-		border: 1px solid rgba(12, 10, 9, 0.1);
+		border: 1px solid #111;
 		border-radius: 0;
 		box-shadow: none;
 		color: #1c1917;
@@ -1182,6 +1182,12 @@ $portal_sections = $portal_plugin instanceof AAC_Member_Portal_Plugin
 	body.pmpro-checkout .aac-managed-card #pmpro_payment_information_fields .pmpro_payment-request-button .pmpro_form_heading {
 		margin-top: 0;
 		margin-bottom: 0.45rem;
+	}
+
+	body.pmpro-checkout .aac-managed-card #pmpro_payment_information_fields .pmpro_card_fields,
+	body.pmpro-checkout .aac-managed-card #pmpro_payment_information_fields .pmpro_form_fields {
+		border: 0 !important;
+		box-shadow: none !important;
 	}
 
 	body.pmpro-checkout .aac-managed-card #pmpro_social_login {
@@ -6836,15 +6842,8 @@ const defaultPublicationCardImages = {
 				return;
 			}
 
-			// Keep checkout as one continuous PMPro form. The former wizard moved
-			// fieldsets into hidden panels and observed their layout, which could
-			// create a mutation/resize feedback loop on plugin-heavy sites.
-			document.body.removeAttribute('data-aac-checkout-wizard');
-			document.body.dataset.aacCheckoutLayout = 'full';
-			form.dataset.aacCheckoutWizardEnhanced = 'full-length';
-			return;
-
 			document.body.dataset.aacCheckoutWizard = 'true';
+			delete document.body.dataset.aacCheckoutLayout;
 
 			const membershipDiscountFieldset = document.getElementById('pmpro_form_fieldset-membership-discounts');
 			if (membershipDiscountFieldset) {
@@ -6881,22 +6880,23 @@ const defaultPublicationCardImages = {
 			const showPublicationStep = getCurrentCheckoutLevelId() > 2 && isCheckoutCountryUS();
 			const stepDefinitions = [
 				{
-					label: 'Account',
+					label: 'Account Information',
 					nodes: findNodes([
 						'#pmpro_user_fields',
 						'#pmpro_account_loggedin',
 					]),
 				},
 						{
-								label: 'Details',
+								label: 'Member Information',
 								nodes: findNodes([
+									'#pmpro_billing_address_fields',
 									'[data-aac-native-member-info="true"]',
 									'#aac_pmpro_native_member_information_fields',
 								]),
 							},
 				{
-					label: 'Publications',
-					enabled: showPublicationStep,
+					label: 'Publications Preferences',
+					enabled: true,
 					nodes: findNodes([
 						'#pmpro_form_fieldset-publication-preferences',
 						'#pmpro_form_fieldset-member-preferences',
@@ -6906,16 +6906,18 @@ const defaultPublicationCardImages = {
 					]),
 				},
 					{
-							label: 'Payment',
+							label: 'Discounts, promo, and checkout',
 							nodes: findNodes([
 								'#pmpro_form_fieldset-membership-discounts',
+								'#pmpro_form_fieldset-discount-fields',
 								'[data-aac-checkout-discount-details]',
 								'#pmpro_form_fieldset-partner-family',
 								'#pmpro_form_fieldset-donation',
+								'.aac-promo-code-section',
+								'#pmpro_pricing_fields',
 								'[data-aac-magazine-summary]',
 								'#pmpro_autorenewal_checkbox',
 								'#pmpro_payment_information_fields',
-							'.pmpro_checkout_gateway',
 							'.pmpro_form_submit',
 					]),
 				},
@@ -7000,7 +7002,7 @@ const defaultPublicationCardImages = {
 			});
 
 			let currentStep = 0;
-			const isWizardEntryEnabled = (entry) => entry.label !== 'Publications' || (isCheckoutCountryUS() && getCurrentCheckoutLevelId() > 2);
+			const isWizardEntryEnabled = () => true;
 			const getEnabledWizardEntries = () => panelsByIndex.filter(isWizardEntryEnabled);
 			const getNearestEnabledStepIndex = (targetIndex, direction = 1) => {
 				const boundedIndex = Math.max(0, Math.min(targetIndex, panelsByIndex.length - 1));
@@ -7046,7 +7048,7 @@ const defaultPublicationCardImages = {
 					return;
 				}
 
-				const isDetailsStep = panelsByIndex[currentStep]?.label === 'Details';
+				const isDetailsStep = panelsByIndex[currentStep]?.label === 'Member Information';
 				const showTshirt = isDetailsStep && isCheckoutCountryUS() && getCurrentCheckoutLevelId() >= 2;
 				tshirtField.hidden = !showTshirt;
 				tshirtField.style.display = showTshirt ? '' : 'none';
