@@ -88,7 +88,7 @@ const getValidThroughDate = (profileInfo = {}) => {
 };
 
 const DetailRow = ({ label, value }) => (
-  <div className="border-t border-stone-200 py-4">
+  <div className="border-t border-stone-200 py-3">
     <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-stone-500">
       {label}
     </p>
@@ -324,8 +324,8 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
   };
 
   const renderAccountSection = () => (
-    <section className="bg-white py-6">
-      <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
+    <section className="bg-white py-2">
+      <div className="grid gap-4 lg:grid-cols-[1.1fr,0.9fr] lg:gap-6">
         <div>
           <div className="grid gap-x-8 md:grid-cols-2">
             <DetailRow label="Membership" value={currentTierLabel} />
@@ -335,7 +335,7 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
           </div>
         </div>
 
-        <div className="space-y-3 border-y-2 border-[#b71c1c] py-5">
+        <div className="space-y-2 border-y-2 border-[#b71c1c] py-3">
           <Button
             asChild
             className="h-12 w-full rounded-none bg-[#b71c1c] text-white hover:bg-[#8f1515]"
@@ -355,7 +355,7 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
               Update Billing Information
             </Button>
           ) : null}
-          <div className="border border-stone-300 bg-white p-5">
+          <div className="border border-stone-300 bg-white p-4">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#b71c1c]">
@@ -383,19 +383,19 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
                 />
               </button>
             </div>
-            <p className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-stone-950">
+            <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-stone-950">
               {hasAutoRenewal ? 'On' : 'Off'}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="mt-12 border-t-2 border-[#b71c1c] pt-8">
-        <div className="mb-5 flex items-center gap-3 border-b-2 border-[#b71c1c] pb-4">
+      <div className="aac-membership-transaction-section mt-6 border-t-2 border-[#b71c1c] pt-5">
+        <div className="mb-3 flex items-center gap-3 border-b-2 border-[#b71c1c] pb-3">
           <Receipt className="h-6 w-6 text-[#a07f21]" />
           <h3 className="text-xl font-bold text-stone-950">Transaction register</h3>
         </div>
-        <p className="mb-5 text-sm leading-6 text-stone-600">
+        <p className="mb-3 text-sm leading-5 text-stone-600">
           Membership payments you complete in this portal appear here. Non-membership charges are not shown in this register.
         </p>
         <TransactionList transactions={transactions} loading={transactionsLoading} />
@@ -558,8 +558,8 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
             : 'Manage AAC account details, billing, and cancellation.'}
         />
       </Helmet>
-      <div className={`aac-manage-page mx-auto w-full bg-white px-6 pb-12 !pt-4 sm:px-12 lg:px-20 xl:px-28 2xl:px-40 ${isWideManageTab ? 'max-w-none' : 'max-w-7xl'}`}>
-        <Link to={standaloneUpgrade ? '/membership' : '/'} className="mb-6 inline-flex items-center gap-2 text-black transition-colors hover:text-[#a07f21]">
+      <div className={`aac-manage-page mx-auto w-full bg-white px-6 pb-6 !pt-2 sm:px-12 lg:px-20 xl:px-28 2xl:px-40 ${isWideManageTab ? 'max-w-none' : 'max-w-7xl'}`}>
+        <Link to={standaloneUpgrade ? '/membership' : '/'} className="mb-4 inline-flex items-center gap-2 text-black transition-colors hover:text-[#a07f21]">
           <ArrowLeft size={16} />
           {standaloneUpgrade ? 'Back to billing' : 'Back to portal'}
         </Link>
@@ -568,14 +568,14 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="space-y-8"
+          className="space-y-4"
         >
-          {!standaloneUpgrade ? <div className="border-b-2 border-[#b71c1c] pb-6">
-            <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-[#b71c1c]">
+          {!standaloneUpgrade ? <div className="border-b-2 border-[#b71c1c] pb-4">
+            <p className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.26em] text-[#b71c1c]">
               Member Account
             </p>
             <h1 className="text-4xl font-bold text-black sm:text-5xl">Manage Membership</h1>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-stone-600 sm:text-base">
+            <p className="mt-2 max-w-3xl text-sm leading-5 text-stone-600 sm:text-base">
               Manage account details, billing, membership changes, and cancellation options from one place.
             </p>
           </div> : null}

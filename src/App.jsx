@@ -58,6 +58,7 @@ function App() {
   const isFullBleedContentRoute = fullBleedContentRoutes.has(location.pathname);
   const flushTopMemberRoutes = new Set(['/profile']);
   const isFlushTopMemberRoute = flushTopMemberRoutes.has(location.pathname);
+  const isCompactMembershipRoute = location.pathname === '/membership';
   const fullWidthContentRoutes = new Set(['/discounts', '/membership', '/membership/upgrade']);
   const isFullWidthContentRoute = fullWidthContentRoutes.has(location.pathname);
   const publicOutletPaths = new Set(['/login', '/linked-accounts', '/home', '/join']);
@@ -226,7 +227,7 @@ function App() {
         <PortalSidebar />
         <div className="flex min-h-0 flex-1 flex-col overflow-visible">
           <main
-            className={`portal-main-surface mx-auto min-h-0 min-w-0 flex-1 overflow-visible ${isFullWidthContentRoute ? 'w-full max-w-none !px-[clamp(1.25rem,2.5vw,3rem)]' : ''} ${isFullBleedContentRoute ? 'px-0 py-0' : isFlushTopMemberRoute ? 'px-4 pb-6 pt-8 md:pb-8' : 'px-4 py-8 md:pb-8'}`}
+            className={`portal-main-surface mx-auto min-h-0 min-w-0 flex-1 overflow-visible ${isFullWidthContentRoute ? 'w-full max-w-none !px-[clamp(1.25rem,2.5vw,3rem)]' : ''} ${isFullBleedContentRoute ? 'px-0 py-0' : isCompactMembershipRoute ? 'px-4 pb-4 pt-3' : isFlushTopMemberRoute ? 'px-4 pb-6 pt-8 md:pb-8' : 'px-4 py-8 md:pb-8'}`}
             style={{ paddingBottom: isFullBleedContentRoute ? 'env(safe-area-inset-bottom, 0px)' : 'calc(1.5rem + env(safe-area-inset-bottom, 0px))' }}
           >
             <div className={isFullWidthContentRoute ? 'w-full max-w-none' : 'mx-auto max-w-7xl'}>
