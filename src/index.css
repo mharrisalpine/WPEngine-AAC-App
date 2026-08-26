@@ -1,0 +1,1058 @@
+
+@import url('https://use.typekit.net/veb7xhf.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #030000;
+  --color-panel: #ffffff;
+  --color-panel-soft: #ffffff;
+  --color-ink: #030000;
+  --color-ink-soft: #39312d;
+  --color-border: rgba(3, 0, 0, 0.12);
+  --color-red: #8f1515;
+  --color-red-deep: #6b1010;
+  --color-mustard: #f8c235;
+  --color-mustard-deep: #dda914;
+  --aac-portal-header-height: 4.75rem;
+  color-scheme: light;
+}
+
+/* Keep the portal authoritative when a host WordPress theme uses aggressive global styles. */
+:is(#root, #aac-member-portal-root) {
+  font-family: futura-pt, Futura, 'Futura PT', 'Century Gothic', 'Trebuchet MS', 'Gill Sans', ui-sans-serif, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: left;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:is(#root, #aac-member-portal-root),
+:is(#root, #aac-member-portal-root) *,
+:is(#root, #aac-member-portal-root) *::before,
+:is(#root, #aac-member-portal-root) *::after {
+  box-sizing: border-box;
+}
+
+:is(#root, #aac-member-portal-root) :where(h1, h2, h3, h4, h5, h6, p, ul, ol) {
+  margin: 0 !important;
+}
+
+:is(#root, #aac-member-portal-root) :where(ul, ol) {
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+:is(#root, #aac-member-portal-root) :where(li)::marker,
+:is(#root, #aac-member-portal-root) :where(li)::before {
+  content: none !important;
+  display: none !important;
+}
+
+:is(#root, #aac-member-portal-root) :where(button, input, select, textarea) {
+  font: inherit !important;
+}
+
+html, body, #root {
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: futura-pt, Futura, 'Futura PT', 'Century Gothic', 'Trebuchet MS', 'Gill Sans', ui-sans-serif, sans-serif;
+  letter-spacing: 0.02em;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.aac-join-scroll-locked,
+body.aac-join-scroll-locked #root {
+  overflow: hidden;
+}
+
+body.aac-join-scroll-locked .topo-lines,
+body.aac-join-scroll-locked .topo-lines > main {
+  overflow: hidden;
+}
+
+.aac-member-portal-shell--signup,
+.aac-signup-embed-surface {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow-x: clip;
+  overscroll-behavior: auto;
+  background: #ffffff;
+  transform: translateZ(0);
+}
+
+.aac-member-portal-shell--signup {
+  position: relative;
+  left: 0;
+  right: 0;
+}
+
+.aac-member-portal-shell--signup #root,
+.aac-signup-embed-surface > .min-h-screen {
+  width: 100%;
+  max-width: none;
+}
+
+.aac-join-layout {
+  min-height: 0;
+  isolation: isolate;
+  padding-top: clamp(0.75rem, 1.5vw, 1.5rem);
+  padding-bottom: clamp(7rem, 10vw, 9rem);
+}
+
+.aac-join-sidebar,
+.aac-join-main {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.aac-join-sidebar {
+  align-self: stretch;
+  overflow: visible;
+  overscroll-behavior: contain;
+}
+
+.aac-signup-step-button {
+  font-size: 1.125rem;
+}
+
+.aac-signup-step-button > span:last-child {
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.aac-membership-tier-button {
+  border-style: solid !important;
+  border-width: 2px !important;
+}
+
+.aac-join-main {
+  overscroll-behavior: auto;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+}
+
+body.aac-member-signup-page.aac-signup-header-managed #site-header {
+  background-color: #030000 !important;
+  background-image: none !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
+  transition: transform 240ms ease, opacity 180ms ease, background-color 220ms ease, box-shadow 220ms ease !important;
+}
+
+body.aac-member-signup-page.aac-signup-header-managed #site-header::before {
+  opacity: 1 !important;
+  transition: opacity 220ms ease !important;
+}
+
+body.aac-member-signup-page.aac-signup-header-managed.aac-signup-header-scrolled #site-header {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body.aac-member-signup-page.aac-signup-header-managed.aac-signup-header-scrolled #site-header::before {
+  opacity: 0 !important;
+}
+
+body.aac-member-signup-page.aac-signup-header-managed.aac-signup-header-hidden #site-header {
+  opacity: 0 !important;
+  transform: translateY(calc(-100% - 8px)) !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.aac-checkout-iframe-wrap,
+.aac-checkout-iframe-wrap iframe {
+  overscroll-behavior: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: futura-pt-bold, futura-pt, Futura, 'Futura PT', 'Century Gothic', 'Trebuchet MS', 'Gill Sans', ui-sans-serif, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.card-gradient {
+  background: #ffffff;
+  box-shadow: 0 22px 60px rgba(16, 10, 7, 0.08);
+  border: 1px solid rgba(16, 10, 7, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 18px 40px rgba(28, 25, 23, 0.06);
+}
+
+.red-glow:hover {
+  box-shadow: 0 0 20px rgba(143, 21, 21, 0.18);
+}
+
+::selection {
+  background: rgba(248, 194, 53, 0.35);
+}
+
+.topo-lines {
+  width: 100%;
+  max-width: 100%;
+  background-color: #ffffff;
+  background-image: none;
+}
+
+.member-app-surface {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: #ffffff;
+}
+
+.portal-main-surface {
+  background-color: #ffffff;
+  background-image: none;
+}
+
+.paper-panel {
+  background: #ffffff;
+  border: 1px solid rgba(3, 0, 0, 0.1);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+}
+
+[data-aac-login-surface="true"] {
+  background: rgba(0, 0, 0, 0.58) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.52) !important;
+}
+
+[data-aac-login-surface="true"] h2,
+[data-aac-login-surface="true"] label {
+  color: #ffffff !important;
+}
+
+[data-aac-login-surface="true"] p[class*="tracking-"],
+[data-aac-login-surface="true"] button[type="button"]:not([data-aac-button="true"]) {
+  color: #f8c235 !important;
+}
+
+.portal-sidebar-surface {
+  position: relative;
+  z-index: 40;
+  background-color: #030000;
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.82)),
+    url('/sidebar-topo-v2.svg');
+  background-position: center center, center top;
+  background-repeat: no-repeat, repeat;
+  background-size: cover, 760px auto;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --portal-sidebar-button-bg: #000000;
+  --portal-sidebar-button-hover-bg: #111111;
+  --portal-sidebar-button-active-bg: #000000;
+  --portal-sidebar-accent: #f8c235;
+}
+
+.portal-sidebar-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.025), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
+  pointer-events: none;
+}
+
+.portal-sidebar-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+.portal-sidebar-desktop {
+  width: 16.5rem;
+  overflow: hidden;
+  z-index: 45;
+}
+
+.portal-horizontal-nav {
+  position: relative;
+  top: auto;
+  z-index: 45;
+  width: 100%;
+  margin-top: clamp(2.25rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.portal-horizontal-nav.portal-sidebar-surface {
+  background: #ffffff;
+  border-top: 1px solid rgba(3, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(3, 0, 0, 0.12);
+  box-shadow: none;
+}
+
+.portal-horizontal-nav.portal-sidebar-surface::before {
+  display: none;
+}
+
+.portal-horizontal-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 96rem;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 0 1rem;
+  scrollbar-width: none;
+}
+
+.portal-horizontal-nav__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.portal-horizontal-nav .portal-sidebar-nav {
+  flex: 0 1 auto;
+  min-width: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding: 0.75rem 0;
+  scrollbar-width: none;
+}
+
+.portal-horizontal-nav .portal-sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.portal-horizontal-nav .portal-sidebar-nav > div,
+.portal-horizontal-nav .portal-sidebar-nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-width: max-content;
+}
+
+.portal-horizontal-nav .portal-sidebar-section-title {
+  display: none;
+}
+
+.portal-horizontal-nav .portal-sidebar-link {
+  justify-content: center;
+  min-height: 3.25rem;
+  min-width: 12.75rem;
+  border: 0;
+  padding: 0.95rem 1.5rem;
+  font-size: 0.98rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.portal-horizontal-nav .portal-sidebar-link--active {
+  border-color: transparent;
+}
+
+.portal-sidebar-signout--horizontal {
+  border-left: 0;
+  padding-left: 0.75rem;
+}
+
+.portal-sidebar-signout--horizontal .portal-sidebar-link {
+  justify-content: center;
+  min-height: 3.25rem;
+  min-width: 11.5rem;
+  border: 0;
+  padding: 0.95rem 1.5rem;
+  font-size: 0.98rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .portal-horizontal-nav {
+    margin-top: 1.75rem;
+  }
+
+  .portal-horizontal-nav__inner {
+    justify-content: flex-start;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-link,
+  .portal-sidebar-signout--horizontal .portal-sidebar-link {
+    min-width: 10rem;
+  }
+}
+
+.portal-sidebar-desktop .portal-sidebar-nav {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.portal-sidebar-desktop .portal-sidebar-section-title {
+  opacity: 1;
+  max-height: none;
+  margin-bottom: 0.75rem;
+  overflow: visible;
+  transform: none;
+  white-space: nowrap;
+}
+
+.portal-sidebar-link {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.09);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #ffffff;
+}
+
+.portal-sidebar-link,
+.portal-sidebar-link:visited,
+.portal-sidebar-link:hover,
+.portal-sidebar-link:focus,
+.portal-sidebar-link:active {
+  color: #ffffff !important;
+}
+
+.portal-sidebar-section-title {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.portal-sidebar-link svg {
+  color: currentColor !important;
+}
+
+.portal-sidebar-link--active,
+.portal-sidebar-link--active:visited,
+.portal-sidebar-link--active:hover,
+.portal-sidebar-link--active:focus,
+.portal-sidebar-link--active:active,
+.portal-sidebar-link--active svg,
+.portal-sidebar-link__icon--active {
+  color: var(--portal-sidebar-accent) !important;
+}
+
+.portal-sidebar-desktop .portal-sidebar-link {
+  justify-content: flex-start;
+  padding-left: 0.85rem;
+  padding-right: 0.85rem;
+}
+
+.portal-sidebar-link:hover {
+  background: transparent;
+  border-color: var(--portal-sidebar-accent);
+  color: #ffffff;
+}
+
+.portal-sidebar-link--active {
+  background: transparent;
+  border-color: var(--portal-sidebar-accent);
+  color: var(--portal-sidebar-accent);
+}
+
+.portal-horizontal-nav .portal-sidebar-link,
+.portal-horizontal-nav .portal-sidebar-link:visited,
+.portal-horizontal-nav .portal-sidebar-link:focus,
+.portal-horizontal-nav .portal-sidebar-link:active,
+.portal-sidebar-signout--horizontal .portal-sidebar-link,
+.portal-sidebar-signout--horizontal .portal-sidebar-link:visited,
+.portal-sidebar-signout--horizontal .portal-sidebar-link:focus,
+.portal-sidebar-signout--horizontal .portal-sidebar-link:active {
+  background: #ffffff;
+  border-color: transparent;
+  color: #16130f !important;
+}
+
+.portal-horizontal-nav .portal-sidebar-link:hover,
+.portal-sidebar-signout--horizontal .portal-sidebar-link:hover {
+  background: #fff5f5;
+  border-color: transparent;
+  color: #8f1515 !important;
+}
+
+.portal-horizontal-nav .portal-sidebar-link--active,
+.portal-horizontal-nav .portal-sidebar-link--active:visited,
+.portal-horizontal-nav .portal-sidebar-link--active:hover,
+.portal-horizontal-nav .portal-sidebar-link--active:focus,
+.portal-horizontal-nav .portal-sidebar-link--active:active {
+  background: #b71c1c;
+  border-color: transparent;
+  color: #ffffff !important;
+}
+
+.portal-horizontal-nav .portal-sidebar-link svg,
+.portal-sidebar-signout--horizontal .portal-sidebar-link svg {
+  color: currentColor !important;
+}
+
+.portal-sidebar-link span,
+.portal-sidebar-link a {
+  letter-spacing: 0.01em;
+}
+
+.portal-sidebar-desktop .portal-sidebar-link__label {
+  position: static;
+  z-index: auto;
+  opacity: 1;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  white-space: normal;
+  transform: none;
+}
+
+.portal-sidebar-link__icon--active {
+  color: var(--portal-sidebar-accent);
+}
+
+.portal-sidebar-link:hover svg {
+  color: var(--portal-sidebar-accent);
+}
+
+.hero-break {
+  position: relative;
+}
+
+.hero-break::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 28px;
+  background:
+    linear-gradient(135deg, transparent 0 46%, rgba(255, 255, 255, 1) 46% 54%, transparent 54% 100%);
+  opacity: 0.9;
+}
+
+[data-aac-button="true"] {
+  border-radius: 0 !important;
+}
+
+.aac-checkout-iframe-wrap {
+  position: static !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 0 !important;
+}
+
+.aac-checkout-iframe-wrap.hidden {
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.aac-checkout-iframe-wrap iframe {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: var(--aac-checkout-iframe-height, 540px) !important;
+  min-height: 540px !important;
+  max-height: none !important;
+  transform: none !important;
+}
+
+.memorial-app {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(137, 115, 88, 0.2), transparent 24%),
+    radial-gradient(circle at 85% 14%, rgba(214, 193, 154, 0.08), transparent 18%),
+    linear-gradient(180deg, #090c10 0%, #11151b 38%, #171b22 100%);
+  color: #f4ead9;
+}
+
+.memorial-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(244, 234, 217, 0.08);
+  background:
+    linear-gradient(180deg, rgba(16, 20, 25, 0.92), rgba(12, 16, 21, 0.9)),
+    linear-gradient(135deg, rgba(244, 234, 217, 0.03), rgba(244, 234, 217, 0));
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(18px);
+}
+
+.memorial-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, rgba(244, 234, 217, 0.06), transparent 26%, transparent 72%, rgba(244, 234, 217, 0.03));
+  pointer-events: none;
+}
+
+.memorial-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.memorial-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    radial-gradient(circle at top left, rgba(214, 193, 154, 0.08), transparent 28%);
+  background-size: 24px 24px, 24px 24px, auto;
+}
+
+.memorial-pulse {
+  transform-origin: center;
+  animation: memorialPulse 2.8s ease-out infinite;
+}
+
+/* Keep identity typography separated when the host theme resets heading and paragraph spacing. */
+#aac-member-portal-root .aac-membership-card-name,
+#root .aac-membership-card-name {
+  line-height: 1.08 !important;
+  overflow: visible !important;
+}
+
+#aac-member-portal-root .aac-membership-card-number,
+#root .aac-membership-card-number {
+  margin-top: 1.5rem !important;
+}
+
+@keyframes memorialPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.96);
+  }
+
+  70% {
+    opacity: 0.08;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+/* Keep profile section rules visible when the host WordPress theme resets borders. */
+#aac-member-portal-root .aac-membership-actions-divider,
+#aac-member-portal-root .aac-redpoint-emergency-divider {
+  border-top: 2px solid #b71c1c !important;
+}
+
+#aac-member-portal-root .aac-redpoint-heading-divider {
+  border-bottom: 2px solid #b71c1c !important;
+}
+
+/* Host-theme-safe button outlines and a bounded automatic-renewal switch. */
+#aac-member-portal-root .aac-manage-tab-button:not([class*="bg-[#b71c1c]"]),
+#aac-member-portal-root .aac-white-outline-button {
+  border: 1px solid #b7b0a6 !important;
+  background: #fff !important;
+}
+
+#aac-member-portal-root .aac-white-outline-button:hover,
+#aac-member-portal-root .aac-manage-tab-button:not([class*="bg-[#b71c1c]"]):hover {
+  border-color: #b71c1c !important;
+}
+
+#aac-member-portal-root .aac-auto-renew-toggle {
+  box-sizing: border-box !important;
+  width: 64px !important;
+  min-width: 64px !important;
+  max-width: 64px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+#aac-member-portal-root .aac-auto-renew-toggle__thumb {
+  left: 4px !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+#aac-member-portal-root .aac-auto-renew-toggle__thumb.translate-x-8 {
+  transform: translateX(32px) !important;
+}
+
+#aac-member-portal-root .aac-auto-renew-toggle__thumb.translate-x-1 {
+  transform: translateX(0) !important;
+}
+
+#aac-member-portal-root .aac-benefit-gallery-card {
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.10) !important;
+}
+
+#aac-member-portal-root .aac-benefit-gallery-media {
+  aspect-ratio: 4 / 3 !important;
+  width: 100% !important;
+  flex: 0 0 auto !important;
+}
+
+#aac-member-portal-root .aac-benefit-gallery-image {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+@media (min-width: 1024px) {
+	.aac-join-layout {
+		height: auto;
+		max-height: none;
+		overflow: visible;
+	}
+
+  .aac-join-sidebar {
+	position: relative;
+	height: auto;
+	max-height: none;
+	align-self: start;
+    padding-top: clamp(2.25rem, 5vh, 4rem) !important;
+  }
+
+	.aac-join-main {
+		height: auto;
+		max-height: none;
+		overflow: visible;
+		overscroll-behavior-y: contain;
+	}
+
+  .aac-join-step-nav {
+    gap: clamp(1.45rem, 4vh, 3rem) !important;
+  }
+
+  .aac-signup-step-button {
+    min-height: clamp(4rem, 7vh, 5.25rem);
+  }
+}
+
+@media (max-width: 767px) {
+  html,
+  body,
+  #root,
+  .member-app-surface,
+  .topo-lines {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .portal-main-surface {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 1rem 2rem !important;
+  }
+
+  .portal-main-surface > .mx-auto.max-w-7xl {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aac-member-mobile-nav.portal-horizontal-nav {
+    position: relative;
+    top: auto;
+    z-index: 50;
+    margin-top: 0.75rem;
+    overflow: visible;
+  }
+
+  .admin-bar .aac-member-mobile-nav.portal-horizontal-nav {
+    top: auto;
+  }
+
+  .portal-horizontal-nav__inner {
+    display: block;
+    max-width: 100%;
+    overflow: visible;
+    padding: 0.7rem 1rem;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-nav {
+    display: block;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-nav > div {
+    display: block;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-nav li,
+  .portal-horizontal-nav .portal-sidebar-link,
+  .portal-sidebar-signout--horizontal .portal-sidebar-link {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-link,
+  .portal-sidebar-signout--horizontal .portal-sidebar-link {
+    min-height: 2.85rem;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.55rem;
+    font-size: 0.78rem;
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-link__label,
+  .portal-sidebar-signout--horizontal .portal-sidebar-link__label {
+    white-space: normal;
+  }
+
+  .portal-horizontal-nav .portal-sidebar-link svg,
+  .portal-sidebar-signout--horizontal .portal-sidebar-link svg {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .portal-sidebar-signout--horizontal {
+    padding: 0.5rem 0 0;
+  }
+
+  .portal-sidebar-signout--horizontal .portal-sidebar-link {
+    min-height: 2.75rem;
+  }
+
+  .aac-membership-card-shell {
+    max-width: 100%;
+    padding-top: 0.25rem;
+  }
+
+  .aac-membership-card {
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    padding: 1rem !important;
+  }
+
+  .aac-membership-card > .relative > .flex.items-start.justify-between {
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .aac-membership-card img[alt="American Alpine Club"] {
+    max-width: 10rem;
+    height: 2.25rem;
+  }
+
+  .aac-membership-card-badges {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .aac-membership-card-badges span {
+    padding: 0.45rem 0.55rem;
+    font-size: 0.54rem;
+    letter-spacing: 0.13em;
+  }
+
+  .aac-membership-card-identity {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.8rem;
+    margin-top: 1rem !important;
+  }
+
+  .aac-membership-card-identity img,
+  .aac-membership-card-identity .aspect-square {
+    width: 4.5rem !important;
+  }
+
+  .aac-membership-card-name {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    font-size: clamp(2rem, 11vw, 2.8rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .aac-membership-card-identity p {
+    letter-spacing: 0.16em;
+  }
+
+  .aac-membership-card-meta {
+    margin-top: 1.25rem !important;
+    padding-top: 1rem !important;
+  }
+
+  .aac-membership-card-meta > .grid {
+    gap: 1rem !important;
+  }
+
+  .aac-membership-card-meta .font-serif {
+    display: none;
+  }
+
+  .aac-membership-card-shell .mt-4.border-t-2 {
+    padding-top: 0.75rem;
+  }
+
+  .aac-manage-page,
+  .aac-contact-page {
+    padding-top: 1.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .aac-manage-page h1,
+  .aac-contact-page h1,
+  .aac-rescue-page h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .aac-contact-page .mb-6.inline-block {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+  }
+
+  .aac-contact-page svg {
+    max-width: 2rem;
+    max-height: 2rem;
+  }
+
+  .aac-benefit-gallery-card {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .aac-benefit-gallery-card > div:first-child {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+
+  .aac-benefit-gallery-card > div:first-child img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .aac-benefit-gallery-card h3 {
+    font-size: 1.45rem;
+  }
+
+  .aac-benefit-gallery-card p {
+    max-height: none !important;
+  }
+
+  .aac-publication-card > div:first-child {
+    height: 14rem !important;
+    padding: 0.5rem;
+  }
+
+  .aac-publication-card h2,
+  .aac-publication-card p {
+    min-height: 0 !important;
+  }
+
+  .aac-rescue-page {
+    padding-top: 1rem !important;
+  }
+
+  .aac-rescue-benefits-card {
+    margin-top: 1.25rem !important;
+    padding: 1rem !important;
+  }
+
+  .aac-rescue-benefits-card h2 {
+    font-size: 1.85rem !important;
+  }
+
+  .aac-rescue-benefits-card a[href^="tel:"] {
+    overflow-wrap: anywhere;
+  }
+
+  .aac-join-sidebar {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .aac-join-layout {
+    padding-top: 1.5rem;
+    padding-bottom: 8rem;
+  }
+
+  .aac-join-sidebar > div {
+    gap: 1rem !important;
+  }
+
+  .aac-join-step-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem !important;
+  }
+
+  .aac-signup-step-button {
+    min-height: 3rem;
+    gap: 0.55rem !important;
+    border-radius: 0 !important;
+    padding: 0.65rem 0.55rem !important;
+  }
+
+  .aac-signup-step-button span:last-child {
+    font-size: 0.76rem;
+    line-height: 1.1;
+  }
+
+  .aac-join-main {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  #membership-form {
+    min-height: 0 !important;
+    padding-top: 1rem !important;
+  }
+
+  #membership-form section {
+    min-height: 0 !important;
+  }
+
+  .aac-membership-tier-card {
+    min-height: 0 !important;
+  }
+
+  .aac-checkout-iframe-wrap iframe {
+    min-height: 720px !important;
+  }
+}
