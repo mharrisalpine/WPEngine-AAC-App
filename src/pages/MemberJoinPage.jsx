@@ -111,7 +111,7 @@ const buildEmbeddedCheckoutUrl = (tierId, wizardStep = 'account') => {
   checkoutUrl.searchParams.set('aac_embed', '1');
   checkoutUrl.searchParams.set('aac_signup', '1');
   checkoutUrl.searchParams.set('aac_wizard_step', wizardStep);
-  checkoutUrl.searchParams.set('aac_rev', 'stable-discount-code-order-487');
+  checkoutUrl.searchParams.set('aac_rev', 'full-width-phone-shirt-490');
 
   return checkoutUrl.toString();
 };

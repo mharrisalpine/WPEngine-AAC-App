@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAC Member Portal
  * Description: Embeds the AAC React member portal inside WordPress and exposes REST endpoints for member profile data (Paid Memberships Pro integration).
- * Version: 1.0.487
+ * Version: 1.0.490
  * Author: AAC
  */
 
@@ -1946,8 +1946,13 @@ final class AAC_Member_Portal_Plugin {
 			.aac-promo-code-section .pmpro_form_fields-inline { display: flex; align-items: stretch; gap: 14px; }
 			.aac-promo-code-section .pmpro_form_fields-inline input[type="text"] { flex: 1 1 auto; min-width: 0; }
 			.aac-promo-code-section .pmpro_form_fields-inline input[type="button"] { flex: 0 0 auto; }
+			[data-aac-phone-shirt-row] { display: grid !important; grid-column: 1 / -1 !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 24px !important; width: 100% !important; }
+			[data-aac-phone-shirt-row] > .pmpro_form_field { box-sizing: border-box; min-width: 0 !important; width: 100% !important; max-width: none !important; }
+			[data-aac-phone-shirt-row] input,
+			[data-aac-phone-shirt-row] select { box-sizing: border-box; width: 100% !important; max-width: none !important; }
 			@media (max-width: 640px) {
 				.aac-promo-code-section .pmpro_form_fields-inline { align-items: stretch; flex-direction: column; gap: 12px; }
+				[data-aac-phone-shirt-row] { grid-template-columns: minmax(0, 1fr) !important; gap: 18px !important; }
 			}
 		</style>
 		<script id="aac-checkout-donation-ui">
@@ -1963,6 +1968,8 @@ final class AAC_Member_Portal_Plugin {
 				const summary = document.getElementById('pmpro_pricing_fields');
 				const content = summary?.querySelector('.pmpro_card_content');
 				if (!summary || !content) return;
+				const summaryHeading = summary.querySelector('.pmpro_card_title');
+				if (summaryHeading) summaryHeading.textContent = 'Order summary';
 				const promoActions = summary.querySelector('.pmpro_card_actions')
 					|| document.querySelector('.aac-promo-code-section .pmpro_card_actions');
 				if (promoActions && summary.parentNode) {
@@ -2026,7 +2033,7 @@ final class AAC_Member_Portal_Plugin {
 				];
 				const total = Math.max(0, rows.reduce((sum, row) => sum + row.amount, 0));
 				content.innerHTML = `
-					<p class="aac-checkout-summary-intro">Review your membership purchase before entering payment details.</p>
+					<p class="aac-checkout-summary-intro">Review everything included before entering payment details.</p>
 					<div class="aac-checkout-summary-rows">
 						${rows.map((row) => `<div class="aac-checkout-summary-row${row.discount ? ' aac-checkout-summary-row--discount' : ''}"><span>${escapeHtml(row.label)}</span><strong>${formatMoney(row.amount)}</strong></div>`).join('')}
 						<div class="aac-checkout-summary-row aac-checkout-summary-row--total"><span>Total</span><strong>${formatMoney(total)}</strong></div>
@@ -2057,6 +2064,7 @@ final class AAC_Member_Portal_Plugin {
 					const graduation = document.querySelector('#pmpro_form_fieldset-discount-fields .pmpro_form_field:has(input[name*="graduation_date"], input[id*="graduation_date"])');
 					const university = document.querySelector('#pmpro_form_fieldset-discount-fields .pmpro_form_field:has(input[name*="university_or_school"], input[id*="university_or_school"])');
 					const serviceSelect = service?.querySelector('select');
+					service?.querySelector('.pmpro_form_hint')?.remove();
 					if (serviceSelect && serviceSelect.options.length <= 1) {
 						['Active', 'Reserve', 'Veteran'].forEach(function (label) {
 							const option = document.createElement('option');
@@ -2135,6 +2143,9 @@ final class AAC_Member_Portal_Plugin {
 				const shirtField = shirtSelect?.closest('.pmpro_form_field');
 				const memberFields = document.querySelector('#pmpro_billing_address_fields .pmpro_form_fields');
 				const phoneField = document.getElementById('bphone')?.closest('.pmpro_form_field');
+				const paymentInformationHeading = document.getElementById('pmpro_payment_information_fields-title');
+
+				paymentInformationHeading?.remove();
 
 				if (birthdate) {
 					birthdate.hidden = true;
