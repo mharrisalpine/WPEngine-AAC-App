@@ -11,15 +11,15 @@ function TierBenefitsList({ benefits, dense, maxItems }) {
   const visibleBenefits = Number.isInteger(maxItems) ? benefits.slice(0, maxItems) : benefits;
   const hiddenCount = Math.max(0, benefits.length - visibleBenefits.length);
   return (
-    <ul className={cn('!-ml-6 !mt-6 space-y-2 !pl-0 text-left', dense ? 'text-[13px] leading-5' : 'text-[13px] leading-5')}>
+    <ul className={cn('!-ml-6 !mt-6 space-y-1.5 !pl-0 text-left !text-[11px] !leading-4')}>
       {visibleBenefits.map((line) => (
         <li key={line} className="flex gap-2 text-[#514a40]">
           <Check
-            className={cn('mt-0.5 shrink-0 text-[#9e1b1e]', dense ? 'h-3.5 w-3.5' : 'h-4 w-4')}
+            className="mt-0.5 h-3 w-3 shrink-0 text-[#9e1b1e]"
             strokeWidth={2.5}
             aria-hidden
           />
-          <span className="min-w-0 flex-1 break-words [overflow-wrap:anywhere]">{line}</span>
+          <span className="min-w-0 flex-1 break-words !text-[11px] !leading-4 [overflow-wrap:anywhere]">{line}</span>
         </li>
       ))}
       {hiddenCount > 0 ? (
