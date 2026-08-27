@@ -381,7 +381,7 @@ const MemberJoinPage = () => {
               >
                 <div className="aac-signup-form-intro mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[#16130f] sm:text-4xl">Select your plan</h2>
+                    <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[#16130f] sm:text-4xl">Select Your Plan</h2>
                     <p className="mt-3 text-base leading-7 text-[#6e675d] sm:text-lg">Choose the annual membership that fits your climbing life.</p>
                   </div>
                 </div>
