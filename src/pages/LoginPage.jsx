@@ -243,7 +243,7 @@ const LoginPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.08 }}
             className="self-center border border-white/18 p-6 text-white shadow-[0_32px_80px_rgba(0,0,0,0.52)] backdrop-blur-md sm:p-8 lg:-translate-y-6"
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.58)' }}
+            style={{ backgroundColor: '#000000' }}
             data-aac-login-surface="true"
           >
             <div className="mb-6 flex items-start justify-between gap-4">

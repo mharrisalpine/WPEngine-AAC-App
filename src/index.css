@@ -254,7 +254,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 [data-aac-login-surface="true"] {
-  background: rgba(0, 0, 0, 0.58) !important;
+  background: #000000 !important;
   border-color: rgba(255, 255, 255, 0.18) !important;
   color: #ffffff !important;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.52) !important;
