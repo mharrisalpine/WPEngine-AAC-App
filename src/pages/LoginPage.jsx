@@ -316,8 +316,9 @@ const LoginPage = () => {
                     />
                     <button
                       type="button"
+                      data-aac-password-visibility="true"
                       onClick={() => setShowPassword((value) => !value)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 border-0 bg-transparent p-0 text-xs font-semibold uppercase tracking-[0.14em] text-[#f8c235] shadow-none outline-none hover:text-[#ffd86a] focus-visible:ring-0"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 border-0 bg-transparent p-0 text-xs font-semibold uppercase tracking-[0.14em] text-black shadow-none outline-none hover:text-black focus-visible:ring-0"
                     >
                       {showPassword ? 'Hide' : 'Show'}
                     </button>
@@ -338,10 +339,10 @@ const LoginPage = () => {
                 type="button"
                 onClick={handleSubmit}
                 disabled={busy}
-                className="mt-8 h-12 w-full rounded-none text-base font-semibold text-white"
+                className="mt-8 h-12 w-full rounded-none text-base font-semibold text-black"
                 style={{
                   backgroundColor: portalDesign.secondaryActionBackground,
-                  color: '#ffffff',
+                  color: '#000000',
                 }}
               >
                 {busy ? 'Please wait…' : forgotMode ? 'Send reset link' : portalContent.login_submit_label}
