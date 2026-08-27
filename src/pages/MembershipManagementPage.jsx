@@ -140,7 +140,7 @@ const TransactionList = ({ transactions, loading }) => {
       {transactions.slice(0, 5).map((transaction) => (
         <div
           key={transaction.id || transaction.referenceId}
-          className="grid gap-3 border border-stone-300 bg-white p-4 md:grid-cols-[1fr,auto]"
+          className="aac-transaction-register-entry grid gap-3 border border-black bg-white p-4 md:grid-cols-[1fr,auto]"
         >
           <div>
             <p className="font-semibold text-stone-950">
@@ -326,7 +326,7 @@ const MembershipManagementPage = ({ standaloneUpgrade = false }) => {
   const renderAccountSection = () => (
     <section className="bg-white py-2">
       <div className="grid gap-4 lg:grid-cols-[1.1fr,0.9fr] lg:gap-6">
-        <div>
+        <div className="aac-billing-membership-details border border-black bg-white p-4">
           <div className="grid gap-x-8 md:grid-cols-2">
             <DetailRow label="Membership" value={currentTierLabel} />
             <DetailRow label="Status" value={profileInfo.status || 'Not available'} />
