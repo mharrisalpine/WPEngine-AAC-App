@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAC Member Portal
  * Description: Embeds the AAC React member portal inside WordPress and exposes REST endpoints for member profile data (Paid Memberships Pro integration).
- * Version: 1.0.551
+ * Version: 1.0.552
  * Author: AAC
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('AAC_MEMBER_PORTAL_VERSION', '1.0.551');
+define('AAC_MEMBER_PORTAL_VERSION', '1.0.552');
 define('AAC_MEMBER_PORTAL_FILE', __FILE__);
 define('AAC_MEMBER_PORTAL_DIR', plugin_dir_path(__FILE__));
 define('AAC_MEMBER_PORTAL_URL', plugin_dir_url(__FILE__));
@@ -1995,6 +1995,9 @@ final class AAC_Member_Portal_Plugin {
 			.aac-promo-autorenew-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 24px; margin: 0 0 24px; }
 			.aac-promo-autorenew-row > .aac-promo-code-section,
 			.aac-promo-autorenew-row > #pmpro_autorenewal_checkbox { box-sizing: border-box; width: 100%; height: 100%; margin: 0 !important; }
+			.aac-promo-autorenew-row > #pmpro_autorenewal_checkbox { display: flex; align-items: stretch; padding: 24px; border: 1px solid #dedbd5; background: #fff; }
+			.aac-promo-autorenew-row > #pmpro_autorenewal_checkbox > .pmpro_form_fields { display: flex; width: 100%; }
+			.aac-promo-autorenew-row .aac-checkout-autorenew { width: 100%; }
 			[data-aac-phone-shirt-row] { display: grid !important; grid-column: 1 / -1 !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 24px !important; width: 100% !important; }
 			[data-aac-phone-shirt-row] > .pmpro_form_field { box-sizing: border-box; min-width: 0 !important; width: 100% !important; max-width: none !important; }
 			[data-aac-phone-shirt-row] input,
@@ -2304,10 +2307,54 @@ final class AAC_Member_Portal_Plugin {
 				goToStep(0);
 			}
 
+			function ensureCheckoutAutoRenewSection() {
+				let fieldset = document.getElementById('pmpro_autorenewal_checkbox');
+				if (fieldset) return fieldset;
+
+				const form = document.querySelector('form.pmpro_form');
+				const summary = document.getElementById('pmpro_pricing_fields');
+				if (!form || !summary?.parentNode) return null;
+
+				fieldset = document.createElement('section');
+				fieldset.id = 'pmpro_autorenewal_checkbox';
+				fieldset.className = 'pmpro_checkout-fields pmpro_form_fieldset aac-autorenew-fallback';
+				fieldset.setAttribute('aria-label', 'Automatic Renewal');
+				fieldset.innerHTML = `
+					<div class="pmpro_form_fields">
+						<input type="hidden" name="autorenew_present" value="1" />
+						<div class="pmpro_form_field" hidden style="display:none">
+							<input type="checkbox" name="autorenew" value="1" checked />
+						</div>
+						<div class="aac-checkout-autorenew">
+							<div class="aac-checkout-autorenew__copy">
+								<strong>Automatic Renewal</strong>
+								<span>Keep this membership active with recurring annual renewal.</span>
+							</div>
+							<label class="aac-managed-toggle">
+								<input type="checkbox" data-aac-checkout-autorenew-toggle checked />
+								<span class="aac-managed-toggle__track" aria-hidden="true"></span>
+								<span class="aac-managed-toggle__state">On</span>
+							</label>
+						</div>
+					</div>`;
+
+				const nativeCheckbox = fieldset.querySelector('input[name="autorenew"]');
+				const visualToggle = fieldset.querySelector('[data-aac-checkout-autorenew-toggle]');
+				const state = fieldset.querySelector('.aac-managed-toggle__state');
+				visualToggle?.addEventListener('change', function () {
+					nativeCheckbox.checked = visualToggle.checked;
+					state.textContent = visualToggle.checked ? 'On' : 'Off';
+					nativeCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+				});
+				summary.parentNode.insertBefore(fieldset, summary);
+				return fieldset;
+			}
+
 			function syncOrderSummary() {
 				const summary = document.getElementById('pmpro_pricing_fields');
 				const content = summary?.querySelector('.pmpro_card_content');
 				if (!summary || !content) return;
+				ensureCheckoutAutoRenewSection();
 				const summaryHeading = summary.querySelector('.pmpro_card_title');
 				if (summaryHeading) summaryHeading.textContent = 'Order summary';
 				const promoActions = summary.querySelector('.pmpro_card_actions')
