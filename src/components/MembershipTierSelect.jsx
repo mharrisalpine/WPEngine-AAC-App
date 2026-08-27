@@ -13,7 +13,7 @@ function TierBenefitsList({ benefits, dense, maxItems }) {
   return (
     <ul className={cn('!-ml-6 !mt-6 space-y-1.5 !pl-0 text-left !text-[11px] !leading-4')}>
       {visibleBenefits.map((line) => (
-        <li key={line} className="flex gap-2 text-[#514a40]">
+        <li key={line} className="flex gap-2 px-2 py-1 text-[#514a40] odd:bg-white even:bg-stone-100">
           <Check
             className="mt-0.5 h-3 w-3 shrink-0 text-[#9e1b1e]"
             strokeWidth={2.5}
