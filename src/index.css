@@ -199,6 +199,10 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700 !important;
 }
 
+:is(#root, #aac-member-portal-root) .aac-redeem-family-invite-button {
+  border: 1px solid #000000 !important;
+}
+
 .card-gradient {
   background: #ffffff;
   box-shadow: 0 22px 60px rgba(16, 10, 7, 0.08);

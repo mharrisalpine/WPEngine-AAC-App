@@ -379,7 +379,7 @@ const MemberJoinPage = () => {
               <section
                 className="grid content-start bg-white p-0 pb-6 sm:pb-8"
               >
-                <div className="aac-signup-form-intro mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div className="aac-signup-form-intro mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-[#16130f] sm:text-4xl">Select your plan</h2>
                     <p className="mt-3 text-base leading-7 text-[#6e675d] sm:text-lg">Choose the annual membership that fits your climbing life.</p>
@@ -395,7 +395,7 @@ const MemberJoinPage = () => {
                     asChild
                     type="button"
                     variant="outline"
-                    className="min-h-[1.75rem] rounded-[6px] border-[#e4dfd6] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-[#6e675d] hover:border-[#d7cfbf] hover:text-[#16130f]"
+                    className="aac-redeem-family-invite-button min-h-[1.75rem] rounded-[6px] border border-black px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.06em] text-black hover:border-black hover:bg-stone-50 hover:text-black"
                   >
                     <Link to="/linked-accounts">{redeemInviteButtonLabel}</Link>
                   </Button>
