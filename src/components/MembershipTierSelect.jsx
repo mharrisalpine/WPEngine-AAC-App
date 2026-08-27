@@ -82,7 +82,7 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
                     selected ? 'bg-[#ffc72c] px-3 py-1.5 text-black' : 'text-[#8f1515]',
                   )}
                 >
-                  {priceLabel}
+                  <span className="aac-membership-tier-card__price-value">{priceLabel}</span>
                   {t.priceCents === 0 ? null : isOneTimeMembershipTierId(t.id) ? (
                     <span className={cn('text-sm font-medium', selected ? 'text-black' : 'text-stone-500')}> one-time</span>
                   ) : (
@@ -119,7 +119,7 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
         >
           <div className="flex items-baseline justify-between gap-2">
             <span className="font-semibold text-black">{t.label}</span>
-            <span className="text-sm font-medium text-[#c8a43a]">
+            <span className="aac-membership-tier-card__price-value text-sm font-medium text-[#c8a43a]">
               {t.priceCents === 0 ? 'Free' : `$${(t.priceCents / 100).toFixed(0)}`}
             </span>
           </div>
