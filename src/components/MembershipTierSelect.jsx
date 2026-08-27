@@ -70,8 +70,8 @@ export function MembershipTierSelect({ selectedId, onSelect, variant = 'compact'
               className={cn(
                 'aac-membership-tier-card flex min-h-[320px] flex-col rounded-none border p-5 text-left shadow-sm transition',
                 selected
-                  ? 'border-[#ffc72c] bg-white ring-2 ring-[#ffc72c] ring-offset-0'
-                  : 'border-[#ffc72c] bg-white hover:border-[#d6a300] hover:shadow-md',
+                  ? 'border-[3px] border-[#ffc72c] bg-white'
+                  : 'border border-black bg-white hover:border-black hover:shadow-md',
               )}
             >
               <div className="flex flex-1 flex-col">
