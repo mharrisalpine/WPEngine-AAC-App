@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAC Member Portal
  * Description: Embeds the AAC React member portal inside WordPress and exposes REST endpoints for member profile data (Paid Memberships Pro integration).
- * Version: 1.0.549
+ * Version: 1.0.550
  * Author: AAC
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('AAC_MEMBER_PORTAL_VERSION', '1.0.549');
+define('AAC_MEMBER_PORTAL_VERSION', '1.0.550');
 define('AAC_MEMBER_PORTAL_FILE', __FILE__);
 define('AAC_MEMBER_PORTAL_DIR', plugin_dir_path(__FILE__));
 define('AAC_MEMBER_PORTAL_URL', plugin_dir_url(__FILE__));
@@ -1992,6 +1992,9 @@ final class AAC_Member_Portal_Plugin {
 			.aac-promo-code-section .pmpro_form_fields-inline { display: flex; align-items: stretch; gap: 14px; }
 			.aac-promo-code-section .pmpro_form_fields-inline input[type="text"] { flex: 1 1 auto; min-width: 0; }
 			.aac-promo-code-section .pmpro_form_fields-inline input[type="button"] { flex: 0 0 auto; }
+			.aac-promo-autorenew-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 24px; margin: 0 0 24px; }
+			.aac-promo-autorenew-row > .aac-promo-code-section,
+			.aac-promo-autorenew-row > #pmpro_autorenewal_checkbox { box-sizing: border-box; width: 100%; height: 100%; margin: 0 !important; }
 			[data-aac-phone-shirt-row] { display: grid !important; grid-column: 1 / -1 !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 24px !important; width: 100% !important; }
 			[data-aac-phone-shirt-row] > .pmpro_form_field { box-sizing: border-box; min-width: 0 !important; width: 100% !important; max-width: none !important; }
 			[data-aac-phone-shirt-row] input,
@@ -2022,6 +2025,7 @@ final class AAC_Member_Portal_Plugin {
 			#pmpro_payment_information_fields .pmpro_form_fields { border: 0 !important; box-shadow: none !important; }
 			@media (max-width: 640px) {
 				.aac-promo-code-section .pmpro_form_fields-inline { align-items: stretch; flex-direction: column; gap: 12px; }
+				.aac-promo-autorenew-row { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 				[data-aac-phone-shirt-row] { grid-template-columns: minmax(0, 1fr) !important; gap: 18px !important; }
 				.aac-simple-checkout-wizard__nav { align-items: stretch; flex-direction: column-reverse; }
 				.aac-simple-checkout-wizard__back,
@@ -2192,14 +2196,15 @@ final class AAC_Member_Portal_Plugin {
 				bindSignupEmailAvailability(form);
 				const memberFields = document.getElementById('pmpro_billing_address_fields');
 				const publicationFields = document.getElementById('pmpro_form_fieldset-publication-preferences');
+				const promoAutorenewRow = document.querySelector('.aac-promo-autorenew-row');
 				const checkoutNodes = [
 					document.getElementById('pmpro_form_fieldset-membership-discounts'),
 					document.getElementById('pmpro_form_fieldset-discount-fields'),
 					document.getElementById('pmpro_form_fieldset-partner-family'),
 					document.getElementById('pmpro_form_fieldset-donation'),
-					document.querySelector('.aac-promo-code-section'),
+					promoAutorenewRow || document.querySelector('.aac-promo-code-section'),
 					document.getElementById('pmpro_pricing_fields'),
-					document.getElementById('pmpro_autorenewal_checkbox'),
+					...(promoAutorenewRow ? [] : [document.getElementById('pmpro_autorenewal_checkbox')]),
 					document.getElementById('pmpro_payment_information_fields'),
 					form.querySelector('.pmpro_form_submit'),
 				].filter((node, index, nodes) => node && form.contains(node) && nodes.indexOf(node) === index);
@@ -2332,6 +2337,22 @@ final class AAC_Member_Portal_Plugin {
 						promoFields.hidden = false;
 						promoFields.style.display = '';
 					}
+				}
+
+				const alignedPromoSection = document.querySelector('.aac-promo-code-section');
+				const autoRenewSection = document.getElementById('pmpro_autorenewal_checkbox');
+				if (alignedPromoSection && autoRenewSection && summary.parentNode) {
+					let promoAutorenewRow = document.querySelector('.aac-promo-autorenew-row');
+					if (!promoAutorenewRow) {
+						promoAutorenewRow = document.createElement('div');
+						promoAutorenewRow.className = 'aac-promo-autorenew-row';
+					}
+					if (promoAutorenewRow.parentNode !== summary.parentNode) {
+						summary.parentNode.insertBefore(promoAutorenewRow, summary);
+					} else if (promoAutorenewRow.nextElementSibling !== summary) {
+						summary.parentNode.insertBefore(promoAutorenewRow, summary);
+					}
+					promoAutorenewRow.append(alignedPromoSection, autoRenewSection);
 				}
 
 				const selectedDiscount = document.querySelector('input[name="aac_membership_discount"]:checked');
