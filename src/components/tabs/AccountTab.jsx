@@ -591,77 +591,77 @@ const AccountTab = ({ profile }) => {
             </ProfileSection>
 
             {canManagePublicationPreferences ? (
-            <ProfileSection title="Preferences">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-t border-stone-200 py-4">
+            <ProfileSection title="Preferences" className="py-3" titleClassName="!mb-2 !pb-2">
+              <div className="space-y-1">
+                <div className="flex items-center justify-between gap-4 border-t border-stone-200 py-2.5">
                   <div>
-                    <p className="text-black font-medium">American Alpine Journal</p>
-                    <p className="text-black/60 text-sm">Choose how you receive this annual publication</p>
+                    <p className="text-sm font-medium leading-tight text-black">American Alpine Journal</p>
+                    <p className="mt-0.5 text-xs leading-snug text-black/60">Choose how you receive this annual publication</p>
                   </div>
                   <select
                     value={accountData.aaj_pref || 'Print'}
                     onChange={(e) => patchAccountData({ aaj_pref: e.target.value })}
-                    className="bg-white border border-[#d9d9d9] text-black rounded-md px-3 py-2"
+                    className="h-9 rounded-md border border-[#d9d9d9] bg-white px-3 py-1 text-sm text-black"
                   >
                     <option value="Print">Print</option>
                     <option value="Digital">Digital</option>
                   </select>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-stone-200 py-4">
+                <div className="flex items-center justify-between gap-4 border-t border-stone-200 py-2.5">
                   <div>
-                    <p className="text-black font-medium">Accidents in North American Climbing</p>
-                    <p className="text-black/60 text-sm">Choose how you receive this annual publication</p>
+                    <p className="text-sm font-medium leading-tight text-black">Accidents in North American Climbing</p>
+                    <p className="mt-0.5 text-xs leading-snug text-black/60">Choose how you receive this annual publication</p>
                   </div>
                   <select
                     value={accountData.anac_pref || 'Print'}
                     onChange={(e) => patchAccountData({ anac_pref: e.target.value })}
-                    className="bg-white border border-[#d9d9d9] text-black rounded-md px-3 py-2"
+                    className="h-9 rounded-md border border-[#d9d9d9] bg-white px-3 py-1 text-sm text-black"
                   >
                     <option value="Print">Print</option>
                     <option value="Digital">Digital</option>
                   </select>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-stone-200 py-4">
+                <div className="flex items-center justify-between gap-4 border-t border-stone-200 py-2.5">
                   <div>
-                    <p className="text-black font-medium">American Climbing Journal</p>
-                    <p className="text-black/60 text-sm">Choose how you receive this journal</p>
+                    <p className="text-sm font-medium leading-tight text-black">American Climbing Journal</p>
+                    <p className="mt-0.5 text-xs leading-snug text-black/60">Choose how you receive this journal</p>
                   </div>
                   <select
                     value={accountData.acj_pref || 'Print'}
                     onChange={(e) => patchAccountData({ acj_pref: e.target.value })}
-                    className="bg-white border border-[#d9d9d9] text-black rounded-md px-3 py-2"
+                    className="h-9 rounded-md border border-[#d9d9d9] bg-white px-3 py-1 text-sm text-black"
                   >
                     <option value="Print">Print</option>
                     <option value="Digital">Digital</option>
                   </select>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-stone-200 py-4">
+                <div className="flex items-center justify-between gap-4 border-t border-stone-200 py-2.5">
                   <div>
-                    <p className="text-black font-medium">Guidebook to Membership</p>
-                    <p className="text-black/60 text-sm">Choose how you receive AAC guide content</p>
+                    <p className="text-sm font-medium leading-tight text-black">Guidebook to Membership</p>
+                    <p className="mt-0.5 text-xs leading-snug text-black/60">Choose how you receive AAC guide content</p>
                   </div>
                   <select
                     value={accountData.guidebook_pref || 'Print'}
                     onChange={(e) => patchAccountData({ guidebook_pref: e.target.value })}
-                    className="bg-white border border-[#d9d9d9] text-black rounded-md px-3 py-2"
+                    className="h-9 rounded-md border border-[#d9d9d9] bg-white px-3 py-1 text-sm text-black"
                   >
                     <option value="Print">Print</option>
                     <option value="Digital">Digital</option>
                   </select>
                 </div>
 
-                <div className="space-y-3 pt-2">
+                <div className="space-y-1.5 pt-1">
                   <Button
                     onClick={handlePublicationPreferencesSave}
                     disabled={savingPreferences || !publicationPreferencesDirty}
-                    className="h-12 w-full rounded-none bg-[#b71c1c] text-lg text-white hover:bg-[#8f1515]"
+                    className="h-10 w-full rounded-none bg-[#b71c1c] text-base text-white hover:bg-[#8f1515]"
                   >
                     {savingPreferences ? 'Saving...' : 'Save Publication Preferences'}
                   </Button>
-                  <p className="text-sm text-black/60">
+                  <p className="text-xs leading-snug text-black/60">
                     Saving here updates your member profile and triggers the outbound Salesforce field sync queue.
                   </p>
                 </div>
