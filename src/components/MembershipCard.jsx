@@ -201,7 +201,7 @@ const MembershipCard = ({ profile }) => {
               <p className="text-[0.66rem] font-medium uppercase tracking-[0.36em] text-[#ff8a80] sm:text-xs">
                 {membershipTierLabel} Member
               </p>
-              <h2 className="aac-membership-card-name mt-3 font-serif text-3xl leading-[1.08] tracking-normal text-[#f7f1e8] sm:text-5xl lg:text-6xl">
+              <h2 className="aac-membership-card-name mt-3 font-serif text-3xl leading-[1.08] tracking-normal text-white sm:text-5xl lg:text-6xl">
                 {memberName}
               </h2>
               <p className="aac-membership-card-number mt-6 font-mono text-sm tracking-[0.18em] text-white/52 sm:text-lg">
@@ -215,7 +215,7 @@ const MembershipCard = ({ profile }) => {
               <div>
                 <p className="font-mono text-[0.66rem] uppercase tracking-[0.3em] text-white/46 sm:text-xs">Valid Thru</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
-                  <p className="font-mono text-xl tracking-[0.06em] text-[#f7f1e8] sm:text-2xl">{validThruLabel}</p>
+                  <p className="font-mono text-xl tracking-[0.06em] text-white sm:text-2xl">{validThruLabel}</p>
                   {hasAutoRenewal ? (
                     <span className="inline-flex items-center gap-1.5 border border-emerald-400/35 bg-emerald-500/10 px-2 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-emerald-200">
                       <CheckSquare2 className="h-3.5 w-3.5 text-emerald-300" strokeWidth={2.4} />
@@ -226,7 +226,7 @@ const MembershipCard = ({ profile }) => {
               </div>
               <div className="text-right">
                 <p className="font-mono text-[0.66rem] uppercase tracking-[0.3em] text-white/46 sm:text-xs">Member Since</p>
-                <p className="mt-2 font-mono text-xl tracking-[0.06em] text-[#f7f1e8] sm:text-2xl">{memberSinceLabel}</p>
+                <p className="mt-2 font-mono text-xl tracking-[0.06em] text-white sm:text-2xl">{memberSinceLabel}</p>
               </div>
             </div>
           </div>
