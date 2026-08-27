@@ -526,9 +526,9 @@ h1, h2, h3, h4, h5, h6 {
 .portal-horizontal-nav .portal-sidebar-link--active:hover,
 .portal-horizontal-nav .portal-sidebar-link--active:focus,
 .portal-horizontal-nav .portal-sidebar-link--active:active {
-  background: #b71c1c;
-  border-color: transparent;
-  color: #ffffff !important;
+  background: #ffffff;
+  border-bottom: 3px solid #b71c1c !important;
+  color: #16130f !important;
 }
 
 .portal-horizontal-nav .portal-sidebar-link svg,
