@@ -23,7 +23,6 @@ const LinkedAccountsPage = () => {
   const { user, profile } = useAuth();
   const portalUiSettings = getPortalUiSettings();
   const portalContent = portalUiSettings.content;
-  const portalDesign = portalUiSettings.design;
   const [inviteCode, setInviteCode] = useState(() => getInviteCodeFromSearch(location.search));
   const [inviteData, setInviteData] = useState(null);
   const [loadingInvite, setLoadingInvite] = useState(false);
@@ -156,11 +155,7 @@ const LinkedAccountsPage = () => {
                 <Button
                   type="submit"
                   disabled={busy}
-                  className="h-11 rounded-none"
-                  style={{
-                    backgroundColor: portalDesign.primaryActionBackground,
-                    color: portalDesign.primaryActionText,
-                  }}
+                  className="h-11 rounded-none border border-[#f8c235] bg-[#f8c235] font-semibold text-black hover:bg-[#dda914]"
                 >
                   {loadingInvite ? 'Checking…' : portalContent.linked_accounts_lookup_button_label}
                 </Button>

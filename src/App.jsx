@@ -63,6 +63,7 @@ function App() {
   const isFullWidthContentRoute = fullWidthContentRoutes.has(location.pathname);
   const publicOutletPaths = new Set(['/login', '/linked-accounts', '/home', '/join']);
   const showPublicOutlet = publicOutletPaths.has(location.pathname);
+  const needsPublicHeaderClearance = location.pathname === '/linked-accounts';
   const { openMembershipAction } = useMembershipActions();
   const expirationWarning = getExpirationWarningDetails(profile);
 
@@ -193,7 +194,11 @@ function App() {
       <div className="topo-lines flex min-h-screen flex-col">
         <main
           className={useDocumentScroll ? 'min-w-0 overflow-visible' : 'min-h-0 min-w-0 flex-1 overflow-y-auto'}
-          style={{ paddingTop: '0px' }}
+          style={{
+            paddingTop: needsPublicHeaderClearance && siteHeaderClearance > 0
+              ? `calc(${siteHeaderClearance}px + clamp(1.5rem, 2.5vw, 2.5rem))`
+              : '0px',
+          }}
         >
           <PortalRouteErrorBoundary key={location.pathname}>
             {showProtectedLogin ? <LoginPage /> : showPublicOutlet ? <Outlet context={{ activeTab, setActiveTab }} /> : <HomePage />}
