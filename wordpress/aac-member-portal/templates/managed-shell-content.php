@@ -4292,7 +4292,7 @@ const defaultPublicationCardImages = {
 		if (!intro) {
 			intro = document.createElement('p');
 			intro.className = 'aac-member-preferences__intro';
-			intro.textContent = 'Choose how you would like to receive each AAC publication. Print keeps the mailed edition on your membership, while digital keeps the experience paperless.';
+			intro.textContent = 'Select a publication to receive a print copy. Publications you do not select for print will be delivered digitally and can be accessed through your member profile.';
 		}
 
 		let cardsGrid = fieldset.querySelector('.aac-member-preferences__grid');

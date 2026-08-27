@@ -2,7 +2,7 @@
 /**
  * Plugin Name: AAC Member Portal
  * Description: Embeds the AAC React member portal inside WordPress and exposes REST endpoints for member profile data (Paid Memberships Pro integration).
- * Version: 1.0.536
+ * Version: 1.0.537
  * Author: AAC
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('AAC_MEMBER_PORTAL_VERSION', '1.0.536');
+define('AAC_MEMBER_PORTAL_VERSION', '1.0.537');
 define('AAC_MEMBER_PORTAL_FILE', __FILE__);
 define('AAC_MEMBER_PORTAL_DIR', plugin_dir_path(__FILE__));
 define('AAC_MEMBER_PORTAL_URL', plugin_dir_url(__FILE__));
@@ -1320,7 +1320,7 @@ final class AAC_Member_Portal_Plugin {
 
 	private function build_pmpro_publication_preferences_markup($cards) {
 		$markup = '<div class="aac-server-member-preferences">';
-		$markup .= '<p class="aac-member-preferences__intro">' . esc_html__('Choose how you would like to receive each AAC publication. Print keeps the mailed edition on your membership, while digital keeps the experience paperless.', 'aac-member-portal') . '</p>';
+		$markup .= '<p class="aac-member-preferences__intro">' . esc_html__('Select a publication to receive a print copy. Publications you do not select for print will be delivered digitally and can be accessed through your member profile.', 'aac-member-portal') . '</p>';
 		$markup .= '<div class="aac-member-preferences__grid">';
 
 		foreach ($cards as $card) {
