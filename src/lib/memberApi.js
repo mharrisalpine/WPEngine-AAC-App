@@ -156,6 +156,7 @@ export const createLinkedAccount = (payload) =>
     () => apiRequest('/linked-accounts/create', {
       method: 'POST',
       body: JSON.stringify(payload || {}),
+      timeoutMs: 60000,
     }),
     async () => {
       throw new Error('Linked account creation is not available in the demo mode.');

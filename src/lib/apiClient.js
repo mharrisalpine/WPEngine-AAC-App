@@ -233,6 +233,11 @@ export async function apiRequest(path, options = {}) {
       signal: fetchOptions.signal || timeoutController?.signal,
     });
     response = await withTimeout(requestPromise, timeoutMs);
+  } catch (error) {
+    if (error?.name === 'AbortError' && !fetchOptions.signal) {
+      throw new Error('The request took too long to finish. Refresh your member profile before trying again, because the account may already have been created.');
+    }
+    throw error;
   } finally {
     if (timeoutId) {
       window.clearTimeout(timeoutId);
